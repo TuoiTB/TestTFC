@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite parallel="none" name="OrangeHRM - Web Automation UI">
+
+
+	<parameter name="serverName" value="TESTING" />
+
+	<!--<test name="Run on Firefox" preserve-order="true">
+		<parameter name="browserName" value="Firefox" />
+		<classes>
+			<class name="FAQ_HN" />
+		</classes>
+	</test>
+-->
+	<test name="Run on Firefox" preserve-order="true">
+		<parameter name="browserName" value="EDGE" />
+		<classes>
+			<class name="FAQ_HN" />
+		</classes>
+	</test>
+
+</suite>
+
