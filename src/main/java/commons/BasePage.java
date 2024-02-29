@@ -150,6 +150,10 @@ public class BasePage {
 	public String getElementAttribute(String locatorType, String attributeValue) {
 		return getElement(locatorType).getAttribute(attributeValue);
 	}
+	public void sendkeyToElementByJS(String locator, String value) {
+		JavascriptExecutor jsExe = (JavascriptExecutor) driver;
+		jsExe.executeScript("arguments[0].setAttribute('value', '" + value + "')", getElement(locator));
+	}
 
 	public void removeAttributeInDOM(String locatorType, String attributeRemove) {
 		JavascriptExecutor jsExe = (JavascriptExecutor) driver;

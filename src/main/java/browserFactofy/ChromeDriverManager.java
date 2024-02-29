@@ -7,9 +7,10 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 public class ChromeDriverManager implements BrowserFactory{
 	public WebDriver getBrowserDriver() {
-		WebDriverManager.chromedriver().setup();
+		WebDriverManager.chromedriver().clearDriverCache().setup();
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--incognito");
+		options.addArguments("--lang=vi");
 		return new ChromeDriver(options);
 	}
 }

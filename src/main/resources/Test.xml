@@ -11,12 +11,23 @@
 		</classes>
 	</test>
 -->
-	<test name="Run on Firefox" preserve-order="true">
+<!--	<test name="Run on Firefox" preserve-order="true">
 		<parameter name="browserName" value="EDGE" />
 		<classes>
 			<class name="FAQ_HN" />
 		</classes>
+	</test>-->
+	<!--<test name="Run on chrome" preserve-order="true">
+		<parameter name="browserName" value="Chrome" />
+		<classes>
+			<class name="FAQ_HN" />
+		</classes>
+	</test>-->
+	<test name="Run on chrome" preserve-order="true">
+		<parameter name="browserName" value="chrome" />
+		<classes>
+			<class name="FAQ_HN" />
+		</classes>
 	</test>
-
 </suite>
 

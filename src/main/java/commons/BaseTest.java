@@ -1,13 +1,20 @@
 package commons;
 
 import browserFactofy.*;
+import io.github.bonigarcia.wdm.managers.OperaDriverManager;
+import io.github.bonigarcia.wdm.managers.SafariDriverManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
+
+import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 
 public class BaseTest {
 	protected final Logger log;
@@ -23,19 +30,19 @@ public class BaseTest {
 	protected WebDriver getBrowserDriver(String browserName, String serverName) {
 		BrowserList brList = BrowserList.valueOf(browserName.toUpperCase());
 		switch (brList) {
-		case FIREFOX:
-			driver = new FirefoxDriverManager().getBrowserDriver();
-			break;
+			case FIREFOX:
+				driver = new FirefoxDriverManager().getBrowserDriver();
+				break;
 
-		case CHROME:
-			driver = new ChromeDriverManager().getBrowserDriver();
-			break;
+			case CHROME:
+				driver = new ChromeDriverManager().getBrowserDriver();
+				break;
 
-		case EDGE:
-			driver = new EdgeDriverManager().getBrowserDriver();
-			break;
-		default:
-			throw new BrowserNotSupportException(browserName);
+			case EDGE:
+				driver = new EdgeDriverManager().getBrowserDriver();
+				break;
+			default:
+				throw new BrowserNotSupportException(browserName);
 		}
 
 		driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);

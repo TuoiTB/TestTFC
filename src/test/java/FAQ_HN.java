@@ -1,22 +1,15 @@
 
 import commons.BaseTest;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pageObjects.DashboardPageObject;
 import pageObjects.FamiliarQuestionHNPageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.PageGeneratorManager;
-import utilities.ExcelHelper;
-
-import java.nio.charset.StandardCharsets;
 
 
 public class FAQ_HN extends BaseTest{
     LoginPageObject loginPage;
-    PageGeneratorManager pageGeneratorManager;
     DashboardPageObject dashboardPage;
     FamiliarQuestionHNPageObject familiarQuestionHNPage;
     private WebDriver driver;
@@ -34,31 +27,44 @@ public class FAQ_HN extends BaseTest{
         loginPage = PageGeneratorManager.getLoginPage(driver);
         dashboardPage = loginPage.loginToSystem(userNameLogin,passwordLogin);
     }
-    @Test
-    public void Employee_01_Primary_Round_0() throws Exception {
-        ExcelHelper excel = new ExcelHelper();
-        excel.setExcelFile("D:/Automation/TEST/src/main/java/utilities/FAQ_TFC_HN_Round_0.xlsx", "Primary");
+
+    //@Test(dataProvider = "FAQ_HN_Primary_Round_0", dataProviderClass = DataProviderFactory.class)
+    public void FAQ_HN_01_Primary_Round_0(String Name, String Questions, String shortAnswers, String Answers) throws Exception {
+        /*ExcelHelper excel = new ExcelHelper();
+        excel.setExcelFile("D:/Automation/TEST/src/main/java/utilities/FAQ_TFC_HN_Round_0.xlsx", "Primary");*/
         familiarQuestionHNPage = dashboardPage.openFamiliarQuestionHaNoi();
         familiarQuestionHNPage.CreateQuestion();
-        familiarQuestionHNPage.enterToName(String.valueOf(StandardCharsets.UTF_8.encode(excel.getCellData("Name", 1))));
-        familiarQuestionHNPage.enterToQuestion(excel.getCellData("Questions", 1));
-        familiarQuestionHNPage.enterToShortAnswers(excel.getCellData("Short answers", 1));
-        familiarQuestionHNPage.enterToDetailAnswers(excel.getCellData("Answers", 1));
+        familiarQuestionHNPage.enterToName("á");
+        familiarQuestionHNPage.enterToQuestion(Questions);
+        familiarQuestionHNPage.enterToShortAnswers(shortAnswers);
+        familiarQuestionHNPage.enterToDetailAnswers(Answers);
+        familiarQuestionHNPage.selectExamDropdown("TOEFL Primary Challenge");
+        familiarQuestionHNPage.selectCompetitionRoundDropdown("Link trải nghiệm Online");
         familiarQuestionHNPage.clickToSaveButton();
+        familiarQuestionHNPage.isMessageSavedDisplayed();
+        familiarQuestionHNPage.clickToArrowLeft();
+        familiarQuestionHNPage.refreshPage();
+        //familiarQuestionHNPage.isTitleQuestionDisplayed(excel.getCellData("Name", 1));
     }
-    @Test
-    public void Employee_01_PersonalDetail() {
-   
-
-    }
-
-    @Test
-    public void Employee_02_ContactDetails() {
-    }
-
-    @Test
-    public void Employee_03_EmergencyContacts() {
-
+    @Test()
+    public void FAQ_HN_02_Primary_Round_0() throws Exception {
+        /*ExcelHelper excel = new ExcelHelper();
+        excel.setExcelFile("D:/Automation/TEST/src/main/java/utilities/FAQ_TFC_HN_Round_0.xlsx", "Primary");*/
+        familiarQuestionHNPage = dashboardPage.openFamiliarQuestionHaNoi();
+        familiarQuestionHNPage.CreateQuestion();
+       // familiarQuestionHNPage.enterToName("á á á á á á â");
+        familiarQuestionHNPage.enterToNameAfterRemoveAttributeByJS("á á á á á á â");
+        //familiarQuestionHNPage.enterToNameByJS("á á á");
+        familiarQuestionHNPage.enterToQuestion("á á á á á á â");
+        familiarQuestionHNPage.enterToShortAnswers("á á á á á á â");
+        familiarQuestionHNPage.enterToDetailAnswers("á á á á á á â");
+        familiarQuestionHNPage.selectExamDropdown("TOEFL Primary Challenge");
+        familiarQuestionHNPage.selectCompetitionRoundDropdown("Link trải nghiệm Online");
+        familiarQuestionHNPage.clickToSaveButton();
+        familiarQuestionHNPage.isMessageSavedDisplayed();
+        familiarQuestionHNPage.clickToArrowLeft();
+        familiarQuestionHNPage.refreshPage();
+        //familiarQuestionHNPage.isTitleQuestionDisplayed(excel.getCellData("Name", 1));
     }
     @AfterClass
     public void afterClass() {
