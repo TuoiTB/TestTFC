@@ -1,7 +1,9 @@
 package pageObjects;
 
 import commons.BasePage;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import pageUIs.FamiliarQuestionHNPageUI;
 
 public class FamiliarQuestionHNPageObject extends BasePage {
@@ -44,15 +46,29 @@ public WebDriver driver;
         waitForElementVisible(FamiliarQuestionHNPageUI.NAME_TEXTBOX);
         sendkeyToElementByJS(FamiliarQuestionHNPageUI.NAME_TEXTBOX, name);
     }
-    public void enterToQuestion(String name){
+    public void enterToQuestionByJS(String value){
         waitForElementVisible(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA);
-        sendkeyToElement(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA, name);
+        sendkeyToElementByJS(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA, value);
+    }
+
+    public void enterToQuestionByJS_test(String name){
+        waitForElementVisible(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA);
+        setValueUsingJavaScript(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA, name);
+    }
+
+    public void enterToShortAnswersByJS(String name){
+        waitForElementVisible(FamiliarQuestionHNPageUI.SHORT_ANSWER_TEXTAREA);
+        sendkeyToElementByJS(FamiliarQuestionHNPageUI.SHORT_ANSWER_TEXTAREA, name);
+    }
+
+    public void enterToQuestion(String value){
+        waitForElementVisible(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA);
+        sendkeyToElement(FamiliarQuestionHNPageUI.QUESTION_TEXTAREA, value);
     }
     public void enterToShortAnswers(String name){
         waitForElementVisible(FamiliarQuestionHNPageUI.SHORT_ANSWER_TEXTAREA);
         sendkeyToElement(FamiliarQuestionHNPageUI.SHORT_ANSWER_TEXTAREA, name);
     }
-
     public void enterToDetailAnswers(String detailAnswers){
         //Switch to Iframe
         switchToFrameIframe(FamiliarQuestionHNPageUI.DETAIL_ANSWER_IFRAME);
@@ -63,6 +79,7 @@ public WebDriver driver;
 
         //enter to content textbox
         waitForElementVisible(FamiliarQuestionHNPageUI.DETAIL_ANSWER_TEXTBOX);
+        scrollToElement(FamiliarQuestionHNPageUI.DETAIL_ANSWER_TEXTBOX);
         sendkeyToElement(FamiliarQuestionHNPageUI.DETAIL_ANSWER_TEXTBOX, detailAnswers);
 
         //switch to  default content

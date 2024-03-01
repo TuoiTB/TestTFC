@@ -6,26 +6,25 @@ import pageObjects.DashboardPageObject;
 import pageObjects.FamiliarQuestionHNPageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.PageGeneratorManager;
+import utilities.DataProviderFactory;
 
 
 public class FAQ_HN extends BaseTest{
     LoginPageObject loginPage;
     DashboardPageObject dashboardPage;
     FamiliarQuestionHNPageObject familiarQuestionHNPage;
-    private WebDriver driver;
     String browserName;
-    private String userNameLogin, passwordLogin;
 
 
     @Parameters({"browserName", "serverName"})
     @BeforeClass
     public void beforeClass(String browserName, String serverName) {
-        userNameLogin = "tuoi.tb@iigvietnam.edu.vn";
-        passwordLogin = "1234567899";
+        String userNameLogin = "tuoi.tb@iigvietnam.edu.vn";
+        String passwordLogin = "1234567899";
         this.browserName = browserName;
-        driver = getBrowserDriver(browserName, serverName);
+        WebDriver driver = getBrowserDriver(browserName, serverName);
         loginPage = PageGeneratorManager.getLoginPage(driver);
-        dashboardPage = loginPage.loginToSystem(userNameLogin,passwordLogin);
+        dashboardPage = loginPage.loginToSystem(userNameLogin, passwordLogin);
     }
 
     //@Test(dataProvider = "FAQ_HN_Primary_Round_0", dataProviderClass = DataProviderFactory.class)
@@ -34,9 +33,9 @@ public class FAQ_HN extends BaseTest{
         excel.setExcelFile("D:/Automation/TEST/src/main/java/utilities/FAQ_TFC_HN_Round_0.xlsx", "Primary");*/
         familiarQuestionHNPage = dashboardPage.openFamiliarQuestionHaNoi();
         familiarQuestionHNPage.CreateQuestion();
-        familiarQuestionHNPage.enterToName("á");
-        familiarQuestionHNPage.enterToQuestion(Questions);
-        familiarQuestionHNPage.enterToShortAnswers(shortAnswers);
+        familiarQuestionHNPage.enterToNameByJS(Name);
+        familiarQuestionHNPage.enterToQuestionByJS(Questions);
+        familiarQuestionHNPage.enterToShortAnswersByJS(shortAnswers);
         familiarQuestionHNPage.enterToDetailAnswers(Answers);
         familiarQuestionHNPage.selectExamDropdown("TOEFL Primary Challenge");
         familiarQuestionHNPage.selectCompetitionRoundDropdown("Link trải nghiệm Online");
@@ -44,7 +43,6 @@ public class FAQ_HN extends BaseTest{
         familiarQuestionHNPage.isMessageSavedDisplayed();
         familiarQuestionHNPage.clickToArrowLeft();
         familiarQuestionHNPage.refreshPage();
-        //familiarQuestionHNPage.isTitleQuestionDisplayed(excel.getCellData("Name", 1));
     }
     @Test()
     public void FAQ_HN_02_Primary_Round_0() throws Exception {
@@ -52,11 +50,9 @@ public class FAQ_HN extends BaseTest{
         excel.setExcelFile("D:/Automation/TEST/src/main/java/utilities/FAQ_TFC_HN_Round_0.xlsx", "Primary");*/
         familiarQuestionHNPage = dashboardPage.openFamiliarQuestionHaNoi();
         familiarQuestionHNPage.CreateQuestion();
-       // familiarQuestionHNPage.enterToName("á á á á á á â");
-        familiarQuestionHNPage.enterToNameAfterRemoveAttributeByJS("á á á á á á â");
-        //familiarQuestionHNPage.enterToNameByJS("á á á");
-        familiarQuestionHNPage.enterToQuestion("á á á á á á â");
-        familiarQuestionHNPage.enterToShortAnswers("á á á á á á â");
+        familiarQuestionHNPage.enterToNameByJS("Nội dung name ở đây");
+        familiarQuestionHNPage.enterToQuestionByJS("á á á á á á â");
+        familiarQuestionHNPage.enterToShortAnswersByJS("á á á á á á â");
         familiarQuestionHNPage.enterToDetailAnswers("á á á á á á â");
         familiarQuestionHNPage.selectExamDropdown("TOEFL Primary Challenge");
         familiarQuestionHNPage.selectCompetitionRoundDropdown("Link trải nghiệm Online");

@@ -154,10 +154,18 @@ public class BasePage {
 		JavascriptExecutor jsExe = (JavascriptExecutor) driver;
 		jsExe.executeScript("arguments[0].setAttribute('value', '" + value + "')", getElement(locator));
 	}
-
+	public void setValueUsingJavaScript(String locator, String textValue) {
+			JavascriptExecutor jsExe = (JavascriptExecutor) driver;
+		jsExe.executeScript("arguments[0].setAttribute('value', arguments[1])", new Object[]{getElement(locator), textValue});
+	}
 	public void removeAttributeInDOM(String locatorType, String attributeRemove) {
 		JavascriptExecutor jsExe = (JavascriptExecutor) driver;
 		jsExe.executeScript("arguments[0].removeAttribute('" + attributeRemove + "');", getElement(locatorType));
+	}
+
+	public void setValueUsingJavaScript(WebElement textElement, String textValue) {
+		JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+		jsExecutor.executeScript("arguments[0].setAttribute('value', arguments[1])", new Object[]{textElement, textValue});
 	}
 
 	public String getElementText(String locatorType) {
